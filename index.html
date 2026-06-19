@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专题 · 乐鱼体育 · 信息整合页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f3f5f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #1f2a3a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 1000px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        /* 深色头图 — 杂志横幅 */
+        .hero {
+            background: linear-gradient(135deg, #0b1a2b 0%, #1e2f40 60%, #243b4f 100%);
+            color: #f0f4fa;
+            margin: 28px 0 24px 0;
+            border-radius: 28px;
+            padding: 48px 36px 52px 36px;
+            box-shadow: 0 12px 28px rgba(0, 20, 30, 0.18);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "📰";
+            font-size: 80px;
+            opacity: 0.08;
+            position: absolute;
+            right: 20px;
+            bottom: -10px;
+            transform: rotate(10deg);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            border-left: 4px solid #f9b84a;
+            padding-left: 18px;
+            margin-top: 8px;
+            max-width: 70%;
+        }
+
+        .hero .meta {
+            margin-top: 32px;
+            display: flex;
+            gap: 28px;
+            font-size: 0.9rem;
+            color: #cbd8e6;
+        }
+
+        .hero .meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 背景说明卡片 — 浅色正文区 */
+        .bg-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 36px 32px 32px 32px;
+            margin: 32px 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e9edf2;
+        }
+
+        .bg-card h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 22px;
+            color: #132433;
+            letter-spacing: -0.01em;
+        }
+
+        .bg-card h2 i {
+            font-style: normal;
+            background: #eef3f9;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #2b4a6b;
+            margin-left: 12px;
+            font-weight: 400;
+        }
+
+        .bg-card p {
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+            color: #2a384a;
+        }
+
+        .bg-card a {
+            color: #c7522a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #e0c7b0;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .bg-card a:hover {
+            color: #a33f1b;
+            text-decoration-color: #a33f1b;
+        }
+
+        .strong-link {
+            background: #faf3ed;
+            padding: 1px 6px;
+            border-radius: 6px;
+        }
+
+        /* 三段自然介绍 — 卡片网格 */
+        .intro-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 28px 0 20px 0;
+        }
+
+        .intro-card {
+            flex: 1 1 260px;
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 28px 24px 24px 24px;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.02);
+            border: 1px solid #e2e9f0;
+            transition: transform 0.15s ease;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-3px);
+            border-color: #cddae9;
+        }
+
+        .intro-card .num {
+            display: inline-block;
+            background: #dce6f0;
+            color: #1f3a57;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 2px 14px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+            letter-spacing: 0.03em;
+        }
+
+        .intro-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 14px;
+            color: #1b3147;
+        }
+
+        .intro-card p {
+            font-size: 0.98rem;
+            color: #31485e;
+            margin-bottom: 8px;
+        }
+
+        .intro-card .tag {
+            display: inline-block;
+            background: #eff4fa;
+            font-size: 0.8rem;
+            padding: 3px 12px;
+            border-radius: 30px;
+            color: #1f3e5e;
+            margin-top: 6px;
+        }
+
+        /* 特色对比 / 小FAQ */
+        .extra-section {
+            background: #f8fafd;
+            border-radius: 26px;
+            padding: 28px 30px;
+            margin: 32px 0 18px 0;
+            border: 1px solid #dfe7f0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .extra-left {
+            flex: 1 1 220px;
+        }
+
+        .extra-left h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #132b40;
+            margin-bottom: 12px;
+        }
+
+        .extra-left ul {
+            list-style: none;
+        }
+
+        .extra-left ul li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #cfdceb;
+            font-size: 0.95rem;
+            color: #2e425b;
+        }
+
+        .extra-left ul li:last-child {
+            border-bottom: none;
+        }
+
+        .extra-left ul li::before {
+            content: "· ";
+            font-weight: 600;
+            color: #b67f5d;
+        }
+
+        .extra-right {
+            flex: 0 0 200px;
+            background: #edf3fa;
+            border-radius: 40px 18px 18px 40px;
+            padding: 16px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .extra-right p {
+            font-size: 0.95rem;
+            font-weight: 450;
+            color: #1e3857;
+        }
+
+        .extra-right .highlight {
+            background: #ffffffc7;
+            display: inline;
+            padding: 0 10px;
+            border-radius: 20px;
+        }
+
+        /* 页尾访问提示 */
+        .footer-note {
+            background: #1b2b3c;
+            border-radius: 26px 26px 20px 20px;
+            padding: 32px 30px 28px 30px;
+            color: #d7e2ef;
+            margin: 40px 0 34px 0;
+            text-align: center;
+        }
+
+        .footer-note p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 10px auto;
+            opacity: 0.9;
+        }
+
+        .footer-note .access-line {
+            font-size: 1.1rem;
+            margin-top: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            display: inline-block;
+            padding: 6px 28px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-note a {
+            color: #f3cdab;
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #b68f70;
+            font-weight: 500;
+        }
+
+        .footer-note a:hover {
+            color: #fae1c7;
+            text-decoration-color: #fae1c7;
+        }
+
+        .footer-note small {
+            display: block;
+            margin-top: 18px;
+            font-size: 0.8rem;
+            opacity: 0.4;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 700px) {
+            .hero {
+                padding: 32px 22px 38px 22px;
+                border-radius: 24px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .sub {
+                max-width: 100%;
+                font-size: 1rem;
+            }
+
+            .hero .meta {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .bg-card {
+                padding: 28px 18px;
+            }
+
+            .intro-grid {
+                flex-direction: column;
+            }
+
+            .extra-section {
+                flex-direction: column;
+                padding: 24px;
+                gap: 20px;
+            }
+
+            .extra-right {
+                border-radius: 18px;
+                padding: 18px 20px;
+                flex: 1 1 auto;
+            }
+
+            .footer-note {
+                padding: 28px 18px 22px;
+            }
+
+            .footer-note .access-line {
+                padding: 4px 18px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .bg-card h2 {
+                font-size: 1.3rem;
+            }
+
+            .intro-card {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 杂志头图横幅 -->
+    <header class="hero">
+        <h1>乐鱼体育 · 信息专题</h1>
+        <div class="sub">日常查询 · 对照阅读 · 延伸观察</div>
+        <div class="meta">
+            <span>📅 整合·2025</span>
+            <span>📌 体育资讯视角</span>
+            <span>📋 平台索引</span>
+        </div>
+    </header>
+
+    <!-- 背景说明段落 -->
+    <section class="bg-card">
+        <h2>📖 背景 <i>为什么关注</i></h2>
+        <p>体育爱好者经常需要在一处汇集赛事动态、数据参考和内容延伸的地方进行日常查阅。<a href="https://cnmain-leyu.com.cn">乐鱼体育</a> 作为一个信息聚合方向的平台，被不少用户纳入自己的浏览路径。它提供了相对完整的体育项目覆盖，包括足球、篮球、网球等主流联赛的实时消息与历史归档。</p>
+        <p>从日常查询的角度来说，能够一站对照多个联赛的积分、赛程以及相关资讯，确实减少了在不同站点之间切换的麻烦。本文从整理和延伸阅读的角度，对平台功能特点与适用场景做简要梳理。</p>
+    </section>
+
+    <!-- 三段自然介绍：卡片式网格 -->
+    <div class="intro-grid">
+        <div class="intro-card">
+            <span class="num">01 · 检索与对照</span>
+            <h3>查赛程 看积分</h3>
+            <p>通过分类入口快速定位到某一联赛的当前轮次、比赛结果和未来对阵。对于需要横向对比多支球队状态的用户，这种集中呈现方式省去不少搜索时间。</p>
+            <span class="tag">⚽ 五大联赛</span>
+            <span class="tag">🏀 欧洲篮球</span>
+        </div>
+        <div class="intro-card">
+            <span class="num">02 · 延伸信息</span>
+            <h3>专题与数据</h3>
+            <p>除了基础比分，平台还整理了不少赛季走势、交手记录和球员数据简表。适合用作赛前参考或赛后复盘时的补充资料，不需要自己再从零搜集。</p>
+            <span class="tag">📊 数据看板</span>
+            <span class="tag">📰 赛事专题</span>
+        </div>
+        <div class="intro-card">
+            <span class="num">03 · 使用习惯</span>
+            <h3>日常浏览参考</h3>
+            <p>很多用户把它当作信息首页之一，早晨快速浏览前一日赛果，或者周末前查看赛程安排。界面层级清晰，内容更新节奏稳定，适合长期使用。</p>
+            <span class="tag">🕒 每日速览</span>
+            <span class="tag">📆 周度规划</span>
+        </div>
+    </div>
+
+    <!-- 附加：特色对照 / FAQ摘要 -->
+    <div class="extra-section">
+        <div class="extra-left">
+            <h3>❓ 常见关注点</h3>
+            <ul>
+                <li>是否覆盖二级联赛及杯赛？ —— 包括英冠、意乙、国王杯等。</li>
+                <li>数据更新频率？ —— 通常比赛结束后十分钟内可见。</li>
+                <li>能否查看历史赛季？ —— 大部分联赛保留近3-5个赛季记录。</li>
+                <li>移动端适配如何？ —— 响应式布局，平板与手机均可正常浏览。</li>
+            </ul>
+        </div>
+        <div class="extra-right">
+            <p><span class="highlight">📌 延伸阅读</span> 在 <a href="https://cnmain-leyu.com.cn">乐鱼体育</a> 上，你可以根据兴趣定制关注联赛，并将常用页面加入浏览器书签，形成个人化的信息面板。</p>
+        </div>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <footer class="footer-note">
+        <p>如果你正在寻找一个能够日常查询体育数据、对照赛程以及延伸阅读相关内容的平台，不妨将上面提到的站点纳入你的浏览列表。</p>
+        <div class="access-line">
+            🔗 前往 <a href="https://cnmain-leyu.com.cn">乐鱼体育</a> 查看最新信息
+        </div>
+        <small>本文仅为信息整理 · 基于公开资料 · 请自行判断适用性</small>
+    </footer>
+
+</div>
+</body>
+</html>

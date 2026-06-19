@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aldesblash.github.io/cnmain-leyu-com-cn/sitemap.xml
