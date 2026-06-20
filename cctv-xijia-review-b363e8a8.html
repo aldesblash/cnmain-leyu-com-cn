@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西甲直播 · 每一轮都值得沉浸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf9f7;
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Times New Roman", serif;
+            color: #2c2a28;
+            line-height: 1.75;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 4rem 1.5rem 6rem;
+        }
+
+        .page {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* 开场短句 – 极简留白，悬停感 */
+        .hero {
+            margin-bottom: 4rem;
+            border-bottom: 1px solid #e2ddd7;
+            padding-bottom: 2.5rem;
+        }
+
+        .hero p {
+            font-size: 1.7rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #3e3b37;
+            line-height: 1.5;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero small {
+            display: block;
+            font-size: 0.95rem;
+            color: #9a938b;
+            letter-spacing: 1px;
+            margin-top: 1.2rem;
+        }
+
+        /* 标题层级 – 干净清晰 */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0 0 1.2rem 0;
+            color: #2c2a28;
+            letter-spacing: 0.5px;
+            border-left: 3px solid #c9b9a8;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin: 1.8rem 0 0.8rem 0;
+            color: #4a4540;
+        }
+
+        p {
+            margin-bottom: 1.3rem;
+            font-size: 1rem;
+            color: #3e3b37;
+        }
+
+        /* 承接段落 – 温和自然，行宽舒适 */
+        .intro-text {
+            margin-bottom: 2.8rem;
+        }
+
+        .intro-text p {
+            font-size: 1.02rem;
+        }
+
+        /* 特点列表 – 卡片式留白列表，非传统项目符号 */
+        .feature-list {
+            list-style: none;
+            margin: 2rem 0 2.8rem 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .feature-list li {
+            background-color: #ffffffef;
+            padding: 1.4rem 1.8rem;
+            border-radius: 0;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.03), 0 0 0 1px #f0ece7 inset;
+            transition: box-shadow 0.2s;
+        }
+
+        .feature-list li:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05), 0 0 0 1px #d9cfc4 inset;
+        }
+
+        .feature-list li strong {
+            display: block;
+            font-weight: 500;
+            font-size: 1.05rem;
+            margin-bottom: 0.2rem;
+            color: #2f2c28;
+            letter-spacing: 0.3px;
+        }
+
+        .feature-list li span {
+            display: block;
+            font-size: 0.95rem;
+            color: #675f57;
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        /* 温和收尾块 */
+        .closing {
+            margin-top: 3.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ece5dd;
+        }
+
+        .closing p {
+            font-size: 0.98rem;
+            color: #5d554d;
+            margin-bottom: 1.4rem;
+        }
+
+        .closing .link-sentence {
+            background-color: #f3efe9;
+            padding: 1.2rem 1.8rem;
+            font-size: 1.04rem;
+            color: #3a3630;
+            border-radius: 0;
+            line-height: 1.7;
+            display: inline-block;
+            width: auto;
+            margin-top: 0.2rem;
+        }
+
+        a {
+            color: #826b58;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 0.5px;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        a:hover {
+            color: #b07a5a;
+            background-color: #f4ede5;
+            text-decoration: none;
+        }
+
+        /* FAQ 摘要 – 作为点缀，不喧宾夺主 */
+        .faq-taste {
+            margin: 2.5rem 0 0.5rem 0;
+            padding: 1.2rem 0 0.2rem 0;
+            border-top: none;
+        }
+
+        .faq-taste details {
+            margin-bottom: 0.8rem;
+            font-size: 0.96rem;
+            color: #5a5249;
+        }
+
+        .faq-taste summary {
+            cursor: pointer;
+            font-weight: 400;
+            color: #3e3a34;
+            padding: 0.4rem 0;
+            letter-spacing: 0.3px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-taste summary::before {
+            content: "▹";
+            margin-right: 0.6rem;
+            font-size: 0.9rem;
+            color: #b09882;
+        }
+
+        .faq-taste details p {
+            margin: 0.5rem 0 0.2rem 1.3rem;
+            font-size: 0.93rem;
+            color: #5f574f;
+        }
+
+        /* 响应式调优 */
+        @media (max-width: 520px) {
+            body {
+                padding: 2.5rem 1.2rem 4rem;
+            }
+            .hero p {
+                font-size: 1.4rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+                padding-left: 0.8rem;
+            }
+            .feature-list li {
+                padding: 1rem 1.2rem;
+            }
+            .closing .link-sentence {
+                padding: 1rem 1.2rem;
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <!-- 开场短句 —— 不点明平台，只说感受 -->
+        <div class="hero">
+            <p>傍晚的风，刚好吹进球场——<br>画面亮起，声音调到刚好。</p>
+            <small>—— 一个普通球迷的周中夜晚</small>
+        </div>
+
+        <!-- 承接段落：从“主题内容”展开，不堆砌关键词 -->
+        <div class="intro-text">
+            <p>
+                聊起西甲，最先想起的往往不是积分榜，而是某次轻柔的挑射、一脚跨越半场的直塞，或是读秒阶段门将弃门而出时全场屏住的那几秒。这些画面不需要解说渲染，甚至不需要回放提醒——它们自己会留在记忆里，等下一次相似的触球声将其唤醒。
+            </p>
+            <p>
+                只是后来，发现要找到稳定、干净的观看方式变得有些繁琐。平台切换、弹窗遮挡、画质模糊……看球本该是一件自然的事，就像拧开收音机等那句“比赛开始”。于是在朋友推荐下，我渐渐习惯了一个叫 <a href="https://cctv-xijia.com">西甲直播</a> 的地方。没有过多修饰，页面安静，链接直接，打开就是比赛。
+            </p>
+        </div>
+
+        <!-- 特点列表 —— 用场景化词语，而非功能罗列 -->
+        <h2>一种更沉静的观赛节奏</h2>
+        <ul class="feature-list">
+            <li>
+                <strong>画面优先</strong>
+                <span>去除了冗余的页面装饰，让直播窗口成为唯一焦点。没有闪烁的弹窗或自动播放的广告，画面从第一秒起就是干净的。</span>
+            </li>
+            <li>
+                <strong>多重视角，自己选</strong>
+                <span>除了常规信号，偶尔还能找到战术镜头、现场原声或客场解说——偶尔换一种声音，就像换了一座球场。</span>
+            </li>
+            <li>
+                <strong>赛程即日历</strong>
+                <span>首页直接列出了未来几轮的比赛日和时间，不藏不绕，看一眼就知道下一场是周末的德比还是周中的补赛。</span>
+            </li>
+            <li>
+                <strong>回忆存档点</strong>
+                <span>许多经典场次保留着完整的回放，没有切割成短视频碎片。你可以像看一场全新的比赛那样，从头看到尾。</span>
+            </li>
+        </ul>
+
+        <!-- 温和展开 + 场景提示 —— 从用户习惯出发 -->
+        <h3>什么时候会想起西甲直播</h3>
+        <p>
+            是深夜忽然想找一场重播，却不想翻遍社交网络求链接；是比赛日刚好在通勤路上，希望手机打开就能看，不需要登录或验证；是周末下午想陪父亲看一轮老牌对决，界面简单到长辈也能直接点。这些时刻，一个干净、直接的直播页面往往比任何App都管用。
+        </p>
+        <p>
+            如果你也偶尔怀念那种“打开浏览器、输入地址、比赛正在踢”的朴素感，或许可以试试把 <a href="https://cctv-xijia.com">西甲直播</a> 放进书签栏。它不是资讯平台，不推送八卦，也不要求注册——它只是安静地等着你点开，然后播放绿茵场上那些正在发生的故事。
+        </p>
+
+        <!-- FAQ 摘要 —— 只提两个最常见、最实在的问题，克制而有用 -->
+        <div class="faq-taste">
+            <details>
+                <summary>需要安装插件或注册账号吗？</summary>
+                <p>不需要。页面基于浏览器直接播放，无需下载额外软件或创建账户。打开即看，退出即走。</p>
+            </details>
+            <details>
+                <summary>错过直播怎么办？</summary>
+                <p>多数比赛结束后保留完整回放，目录按日期排列，可以像翻阅日历一样找到你想补的场次。</p>
+            </details>
+        </div>
+
+        <!-- 温和结尾 —— 自然收束，不催促 -->
+        <div class="closing">
+            <p>
+                足球的魅力有一部分藏在“准时收看”里——你知道22个人会在某个时刻站到草坪上，而你也恰好坐在屏幕前。如果这份准时变得太过复杂，看球的乐趣就打了折扣。找回那种简单，有时候只需要一个直接的链接。
+            </p>
+            <div class="link-sentence">
+                周末比赛日，我习惯提前打开 <a href="https://cctv-xijia.com">西甲直播</a>，泡杯茶，等开场。
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: #8c847b;">
+                —— 仅以这些文字，纪念那些不用费力就能看球的夜晚。
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>
